@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#1a1a1a">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="REBT">
+<meta name="mobile-web-app-capable" content="yes">
+<link rel="manifest" href="manifest.json">
+<title>Diseñador Técnico de Cuadros Eléctricos REBT</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div id="app">
+  <h2>Diseñador Técnico de Cuadros Eléctricos REBT <span class="firma">by J.A.RAMOS</span></h2>
+  <div class="cfg">
+    <label>Acometida<select data-cfg="ac"><option value="mono">Monofásica 230 V (L+N)</option><option value="tri">Trifásica 400 V (3L+N)</option></select></label>
+    <label>Calibre IGA<select data-cfg="iga-amp"><option value="25">25 A</option><option value="32">32 A</option><option value="40">40 A</option></select></label>
+    <label>Filas Riel DIN<select data-cfg="rows"><option value="2">2 Filas</option><option value="3">3 Filas</option></select></label>
+    <label>Electrificación<select data-cfg="elec"><option value="basica">Básica (C1-C5)</option><option value="elevada">Elevada (C1-C13)</option></select></label>
+  </div>
+  <div class="pal" id="pal-desktop"></div>
+  <div class="stage">
+    <div id="railwrap-desktop">
+      <svg id="railbase" width="556" height="310" viewBox="0 0 556 310"></svg>
+      <svg id="wires" width="556" height="310" viewBox="0 0 556 310"></svg>
+    </div>
+  </div>
+  <div class="meta">
+    <span>Carga del IGA: <b id="pct">0</b>% (<b id="used">0</b> Módulos usados de <b id="tot">36</b>)</span>
+    <div class="track"><div class="fill" id="fill"></div></div>
+  </div>
+  <div class="chips" id="chips"></div>
+  <div class="hintline">RCDs distribuidos por filas · Capa de Tierra (verde/amarillo) al fondo de la canaleta.</div>
+  <div class="row">
+    <span class="empty">Clic para añadir · Arrastra lateralmente para reordenar · × para quitar</span>
+    <div class="acts">
+      <button data-action="clear">Vaciar Cuadro</button>
+      <button data-action="unifilar">Ver Esquema Unifilar</button>
+      <button class="pri" data-action="uni">Generar Memoria Unifilar</button>
+    </div>
+  </div>
+</div>
+<footer id="pie">
+  <span>Diseñador Técnico de Cuadros Eléctricos · REBT</span>
+  <span class="firma">by J.A.RAMOS</span>
+</footer>
+
+<header id="topbar">
+  <span class="brand">REBT · Cuadros <small class="firma-m">by J.A.RAMOS</small></span>
+  <div>
+    <button id="btn-info" class="ico" aria-label="Información">ⓘ</button>
+    <button id="btn-cfg" class="ico" aria-label="Configuración">⚙️</button>
+  </div>
+</header>
+
+<div id="panel-cfg" class="panel">
+  <div class="cfg-m">
+    <label>Acometida<select data-cfg="ac"><option value="mono">Mono 230 V</option><option value="tri">Tri 400 V</option></select></label>
+    <label>IGA<select data-cfg="iga-amp"><option value="25">25 A</option><option value="32">32 A</option><option value="40">40 A</option></select></label>
+    <label>Filas<select data-cfg="rows"><option value="2">2</option><option value="3">3</option></select></label>
+    <label>Electrificación<select data-cfg="elec"><option value="basica">Básica</option><option value="elevada">Elevada</option></select></label>
+  </div>
+</div>
+
+<div id="panel-info" class="panel">
+  <div class="meta-m">
+    <span>Carga: <b data-out="pct">0</b>% · <b data-out="used">0</b>/<b data-out="tot">36</b> mód.</span>
+    <div class="track"><div class="fill" data-out="fill"></div></div>
+  </div>
+  <div class="chips-m" data-out="chips"></div>
+  <div class="acts-m">
+    <button data-action="clear">Vaciar</button>
+    <button data-action="unifilar">Unifilar</button>
+    <button class="pri" data-action="uni">Memoria</button>
+  </div>
+</div>
+
+<main id="stage-wrap">
+  <div id="stage" class="stage">
+    <div id="railwrap">
+      <svg id="railbase-m" width="556" height="310" viewBox="0 0 556 310"></svg>
+      <svg id="wires-m" width="556" height="310" viewBox="0 0 556 310"></svg>
+    </div>
+  </div>
+</main>
+
+<div id="zoom-controls">
+  <button data-zoom="-" aria-label="Reducir">−</button>
+  <button data-zoom="fit" aria-label="Ajustar">⤢</button>
+  <button data-zoom="+" aria-label="Ampliar">+</button>
+</div>
+
+<button id="fab" aria-label="Añadir circuito">＋</button>
+
+<div id="drawer" class="drawer">
+  <div class="drawer-handle"></div>
+  <div class="pal" id="pal-mobile"></div>
+</div>
+
+<div id="ctx-menu" style="display:none;">
+  <button data-act="info">ℹ️ Ver datos</button>
+  <button data-act="delete">🗑️ Eliminar</button>
+</div>
+
+<div id="unifilar-modal" style="display:none;">
+  <div class="modal-bg" onclick="closeUnifilar()"></div>
+  <div class="modal-content">
+    <div class="modal-head">
+      <h3>Esquema Unifilar · REBT (ITC-BT-25)</h3>
+      <button onclick="closeUnifilar()">✕ Cerrar</button>
+    </div>
+    <div id="unifilar-body" class="modal-body"></div>
+  </div>
+</div>
+
+<script src="app.js"></script>
+<script>
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => navigator.serviceWorker.register('./sw.js').catch(()=>{}));
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,20 @@
+{
+  "name": "REBT Cuadros · by J.A.RAMOS",
+  "short_name": "REBT",
+  "description": "Diseñador técnico de cuadros eléctricos REBT · by J.A.RAMOS",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "any",
+  "background_color": "#f5f5f5",
+  "theme_color": "#1a1a1a",
+  "lang": "es",
+  "icons": [
+    {
+      "src": "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'><rect width='512' height='512' rx='96' fill='%231a1a1a'/><text x='256' y='230' font-family='system-ui,sans-serif' font-size='140' font-weight='bold' fill='%23f5f5f5' text-anchor='middle'>REBT</text><text x='256' y='330' font-family='system-ui,sans-serif' font-size='70' font-style='italic' font-weight='600' fill='%23b3891d' text-anchor='middle'>J.A.RAMOS</text></svg>",
+      "sizes": "512x512",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}
