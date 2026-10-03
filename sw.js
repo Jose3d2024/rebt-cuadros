@@ -1,4 +1,4 @@
-const VERSION = 'v1';
+const VERSION = 'v2';
 const CACHE = 'rebt-cuadros-' + VERSION;
 const ASSETS = ['./', './index.html', './styles.css', './app.js', './manifest.json'];
 
