@@ -75,8 +75,7 @@ function assignPhases(){
 
 // ============ CABLEADO ============
 function wire(d,c,t){t=t||3.5;var a=' fill="none" stroke-linecap="round" stroke-linejoin="round"';
-  return '<path d="'+d+'" stroke="#fff" stroke-width="'+(t+3)+'"'+a+'/><path d="'+d+'" stroke="'+c+'" stroke-width="'+t+'"'+a+'/>';
-}
+  return '<path d="'+d+'" stroke="#fff" stroke-width="'+(t+3)+'"'+a+'/><path d="'+d+'" stroke="'+c+'" stroke-width="'+t+'"'+a+'/>';}
 function pe(d,t){t=t||3.5;return wire(d,WCOL.PE,t)+'<path d="'+d+'" stroke="#e6c200" stroke-width="'+t+'" stroke-dasharray="5 5" fill="none"/>';
 }
 function hh(){return cfg.rows*RH+30;}
@@ -165,8 +164,7 @@ function dragify(el,b){
   el.addEventListener('pointermove',function(e){if(!el.classList.contains('drag'))return;var dx=e.clientX-sx;if(Math.abs(dx)>3)mv=true;el.style.left=(oL+dx)+'px';});
   el.addEventListener('pointerup',function(e){el.classList.remove('drag');
    if(!mv){el.style.left=(LEFT+(oS%N)*MW)+'px';return;}
-   var ns=Math.round(oS+(e.clientX-sx)/MW);if(ok(ns,b.type,b.id))b.slot=ns;render();});
-}
+   var ns=Math.round(oS+(e.clientX-sx)/MW);if(ok(ns,b.type,b.id))b.slot=ns;render();});}
 
 function mkDev(b,fixed,container){
   var d=document.createElement('div'),Pn=P(),m,art,l1,l2,it,suf;d.className='dev'+(fixed?' fix':'');
